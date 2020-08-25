@@ -6,7 +6,7 @@ import {PublicKey} from "near-api-js/lib/utils";
 
 const YourStakingPoolIdKey = "your_staking_pool_id";
 const OneNear = new BN("1000000000000000000000000");
-const ContractName = 'stakehouse.betanet';
+const ContractName = 'stake.guildnet';
 const MinAccountIdLen = 2;
 const MaxAccountIdLen = 64;
 const ValidAccountRe = /^(([a-z\d]+[-_])*[a-z\d]+\.)*([a-z\d]+[-_])*[a-z\d]+$/;
@@ -76,10 +76,10 @@ class App extends React.Component {
 
   async _initNear() {
     const nearConfig = {
-      networkId: 'betanet',
-      nodeUrl: 'https://rpc.betanet.near.org',
+      networkId: 'guildnet',
+      nodeUrl: 'https://rpc.openshards.io',
       contractName: ContractName,
-      walletUrl: 'https://wallet.betanet.near.org',
+      walletUrl: 'https://wallet.openshards.io',
     };
     const keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore();
     const near = await nearAPI.connect(Object.assign({ deps: { keyStore } }, nearConfig));
@@ -364,7 +364,7 @@ class App extends React.Component {
     ));
     return (
         <div className="px-5">
-          <h1>Staking Pool Factory (betanet)</h1>
+          <h1>Staking Pool Factory (guildnet)</h1>
           <p>
             Create and deploy a new staking pool. It'll cost you <span className="font-weight-bold">{fromYocto(this._minAttachedBalance)} Ⓝ</span> to cover storage fees on the new staking pool.
           </p>
@@ -378,12 +378,12 @@ class App extends React.Component {
               this.state.poolSuccess ? (
                 <div className="alert alert-success" role="alert">
                   Successfully created your staking pool <a
-                  href={`https://explorer.betanet.near.org/accounts/${this.state.yourStakingPoolAccountId}`}>@{this.state.yourStakingPoolAccountId}</a>
+                  href={`https://explorer.openshards.io/accounts/${this.state.yourStakingPoolAccountId}`}>@{this.state.yourStakingPoolAccountId}</a>
                 </div>
               ) : (
                 <div className="alert alert-danger" role="alert">
                   Failed to create your staking pool. Take a look at the factory contract on explorer: <a
-                  rel="noopener noreferrer" target="_blank" href={`https://explorer.betanet.near.org/accounts/${ContractName}`}>@{ContractName}</a>
+                  rel="noopener noreferrer" target="_blank" href={`https://explorer.openshards.io/accounts/${ContractName}`}>@{ContractName}</a>
                 </div>
               )
             )
